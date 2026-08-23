@@ -1,0 +1,48 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        import numpy as np
+        import time
+        start=time.time()
+        np_board=np.array(board)
+        
+        # print(np_board.shape[0])
+        # print(np_board)
+        for i in range(np_board.shape[0]):
+            x=np_board[:,i]
+            y=np_board[i,:]
+            x=x[x!='.']
+            # print(x)
+            y=y[y!='.']
+            # print(y)
+            if len(x)!=len(set(x)):
+                end=time.time()
+                print('time',end-start)
+                return False
+                
+            if len(y)!=len(set(y)):
+                end=time.time()
+                print('time',end-start)
+                return False
+                
+         
+        for i in range(9):
+            row=i//3
+            col=i%3
+            row=row*3
+            col=col*3
+            matrix=np_board[row:row+3,col:col+3]
+            matrix=matrix[matrix!='.']
+            # print('hi')
+            # print(matrix)
+            if len(matrix)!=len(set(matrix)):
+                end=time.time()
+                print('time',end-start)
+                return False
+        end=time.time()
+        print('time',end-start)
+        return True
+    
+
+        
+        
